@@ -3,7 +3,7 @@ export interface Stop {
     name: string
 }
 
-export async function lookup(query: string) : Promise<Stop[]> {
+export async function lookup(query: string): Promise<Stop[]> {
     const url = `https://www.kvg-kiel.de/internetservice/services/lookup/autocomplete?query=${query}`
     const resp = await fetch(url)
     const body = await resp.text()
@@ -30,4 +30,27 @@ export async function lookup(query: string) : Promise<Stop[]> {
     })
 
     return stops
+}
+
+export async function getStop(id: string): Promise<Stop | null> {
+    const url = `https://www.kvg-kiel.de/internetservice/services/stopInfo/stop?stop=${id}`
+    const resp = await fetch(url)
+    // body looks like this:
+    // {
+    //     "id": "60837103646281571",
+    //     "passengerName": "Hauptbahnhof"
+    // }
+
+    // for some reason the stop also has an internal id that differs from what we call id.
+    // their id will be ignored as it is not used anywhere.
+
+    if (resp.status === 404)
+        return null
+
+    const stop = await resp.json()
+
+    return {
+        id: id,
+        name: stop.passengerName
+    } as Stop
 }
