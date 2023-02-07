@@ -1,9 +1,4 @@
-export interface Stop {
-    id: StopId
-    name: string
-}
-
-export type StopId = string
+import { Info, InfoMode, Stop, StopId } from "./types.ts"
 
 export async function lookup(query: string): Promise<Stop[]> {
     const url = `https://www.kvg-kiel.de/internetservice/services/lookup/autocomplete?query=${query}`
@@ -16,7 +11,6 @@ export async function lookup(query: string): Promise<Stop[]> {
     // <li stop="2387">Hauptbahnhof</li>
     // <li stop="2541">Hauptfeuerwache</li>
     // </ul>
-
 
     let lines = body.split('\n')
     lines = lines.slice(1) // remove <ul>
@@ -33,6 +27,7 @@ export async function lookup(query: string): Promise<Stop[]> {
 
     return stops
 }
+
 
 export async function getStop(id: StopId): Promise<Stop | null> {
     const url = `https://www.kvg-kiel.de/internetservice/services/stopInfo/stop?stop=${id}`
@@ -57,24 +52,6 @@ export async function getStop(id: StopId): Promise<Stop | null> {
     } as Stop
 }
 
-export enum InfoMode {
-    Arrival,
-    Departure
-}
-
-export interface Info {
-    mode: InfoMode,
-    actual: InfoItem[]
-}
-
-export interface InfoItem {
-    actualRelativeTime: number,
-    actualTime: string,
-    direction: string,
-    patternText: string,
-    plannedTime: string,
-    tripId: string
-}
 
 export async function getInfo(id: StopId, mode: InfoMode = InfoMode.Arrival) {
     const modeStr = mode === InfoMode.Departure ? "departure" : "arrival"

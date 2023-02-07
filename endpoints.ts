@@ -1,6 +1,7 @@
 import { oak } from "./deps.ts";
-import { getInfo, InfoMode, lookup, Stop } from "./kvg.ts";
+import { getInfo, lookup } from "./kvg.ts";
 import { addStop, AddStopEffect, getStops } from "./persistence.ts";
+import { Stop,InfoMode } from "./types.ts";
 
 type Router = oak.Router
 

@@ -1,4 +1,4 @@
-import { Stop } from "./kvg.ts";
+import { Stop } from "./types.ts";
 
 const stops : Stop[] = []
 
