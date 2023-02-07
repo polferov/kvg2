@@ -2,7 +2,7 @@ import { oak } from "./deps.ts";
 import { getInfo, InfoMode, lookup, Stop } from "./kvg.ts";
 import { addStop, AddStopEffect, getStops } from "./persistence.ts";
 
-type Router = oak.Router<Record<string, any>>
+type Router = oak.Router
 
 export function mapEndpoints(router: Router) {
     mapGetStops(router)
