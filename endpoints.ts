@@ -1,7 +1,7 @@
 import { oak } from "./deps.ts";
 import { getInfo, lookup } from "./kvg.ts";
 import { addStop, AddStopEffect, getStops } from "./persistence.ts";
-import { Stop,InfoMode } from "./types.ts";
+import { InfoMode, AddStopsResult } from "./types.ts";
 
 type Router = oak.Router
 
@@ -21,7 +21,7 @@ function mapGetStops(router: Router) {
 function mapAddStops(router: Router) {
     router.post("/stops/:query", async ctx => {
         const stops = await lookup(ctx.params.query)
-        const effect = { added: [] as Stop[], updated: [] as Stop[] }
+        const effect: AddStopsResult = { added: [], updated: [] }
         for (const stop of stops)
             switch (await addStop(stop)) {
                 case AddStopEffect.Added: effect.added.push(stop); break
@@ -40,10 +40,10 @@ function mapGetInfo(router: Router) {
 
     router.get("/info/:stopId/:mode", async ctx => {
         let mode;
-        if(ctx.params.mode === "arrival")
-        mode = InfoMode.Arrival
+        if (ctx.params.mode === "arrival")
+            mode = InfoMode.Arrival
         else if (ctx.params.mode === "departure")
-        mode = InfoMode.Departure
+            mode = InfoMode.Departure
         else {
             ctx.response.status = 400
             return

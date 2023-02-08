@@ -23,3 +23,8 @@ export interface InfoItem {
     plannedTime: string,
     tripId: string
 }
+
+export interface AddStopsResult {
+    added: Stop[]
+    updated: Stop[]
+}
