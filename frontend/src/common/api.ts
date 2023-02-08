@@ -14,7 +14,7 @@ export async function getInfo(stop: Stop): Promise<Info> {
     return info as Info
 }
 
-export async function tryAddStop(query: string) {
+export async function tryAddStop(query: string): Promise<boolean> {
     const resp = await fetch(`${url}/stops/${query}`, { method: "POST" })
     const result: AddStopsResult = await resp.json()
     return result.added.length !== 0 || result.updated.length !== 0

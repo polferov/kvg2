@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Stop } from "../../../types";
-  import { getStops } from "../common/api";
+  import { getStops, tryAddStop } from "../common/api";
   import {
     cacheStops,
     getCachedStops,
@@ -14,12 +14,16 @@
   let options: Stop[] = getCachedStops();
   let searchInput: HTMLInputElement;
 
-  getStops().then((s) => {
-    s.sort((a, b) => a.name - b.name);
-    console.log(s);
-    options = s;
-    cacheStops(s);
-  });
+  function initStops() {
+    getStops().then((s) => {
+      s.sort((a, b) => a.name - b.name);
+      console.log(s);
+      options = s;
+      cacheStops(s);
+    });
+  }
+
+  initStops();
 
   function results() {
     if (
@@ -35,7 +39,7 @@
       )
       .sort((a, b) => getHistoryIndex(b) - getHistoryIndex(a));
   }
-  
+
   let autocomplete: Stop[];
   function update(...triggers: any[]) {
     autocomplete = results();
@@ -59,6 +63,14 @@
     if (document.activeElement !== searchInput) return;
     update();
   });
+
+  let requestSearchElement: HTMLButtonElement;
+  async function onBlur() {
+    const p = new Promise<void>((resolve) => setTimeout(() => resolve(), 0));
+    await p;
+    if (document.activeElement === requestSearchElement) return;
+    hideAutocomplete = true;
+  }
 </script>
 
 <div class="search-container">
@@ -67,7 +79,7 @@
     class="search-input"
     bind:value={query}
     on:focus={() => (hideAutocomplete = false)}
-    on:blur={() => setTimeout(() => (hideAutocomplete = true), 0)}
+    on:blur={onBlur}
     on:select={update}
     bind:this={searchInput}
     autocomplete="off"
@@ -81,6 +93,17 @@
         >
       </li>
     {/each}
+    {#if autocomplete.length === 0 && query.length > 2}
+      <li class="autocomplete-item">
+        <button
+          bind:this={requestSearchElement}
+          class="autocomplete-item-content"
+          on:focus={async () => {
+            if (await tryAddStop(query)) initStops();
+          }}>search</button
+        >
+      </li>
+    {/if}
   </ul>
 </div>
 
