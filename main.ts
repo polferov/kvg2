@@ -7,6 +7,12 @@ mapEndpoints(api)
 
 
 const app = new oak.Application()
+
+app.use(async (ctx, next) => {
+  ctx.response.headers.append("Access-Control-Allow-Origin", "*")
+  await next()
+})
+
 app.use(api.routes())
 app.use(api.allowedMethods())
 
