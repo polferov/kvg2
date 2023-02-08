@@ -1,29 +1,64 @@
 <script lang="ts">
   import type { Stop } from "../../../types";
   import { getStops } from "../common/api";
-  import { cacheStops, getCachedStops } from "../common/storage";
-  export let select : (stop: Stop) => void
+  import {
+    cacheStops,
+    getCachedStops,
+    getHistory,
+    getHistoryIndex,
+    getLastSelectedStop,
+    setLastSelectedStop,
+  } from "../common/storage";
+  export let select: (stop: Stop) => void;
   let query = "";
-  let options: Stop[] = getCachedStops()
+  let options: Stop[] = getCachedStops();
+  let searchInput: HTMLInputElement;
 
   getStops().then((s) => {
-    console.log(s)
+    s.sort((a, b) => a.name - b.name);
+    console.log(s);
     options = s;
     cacheStops(s);
   });
-  
-  function results(opts : Stop[], q: string) {
-    return opts.filter((o) =>
-      o.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
-    );
+
+  function results() {
+    if (
+      query === "" ||
+      (searchInput &&
+        searchInput.selectionStart === 0 &&
+        searchInput.selectionEnd === searchInput.value.length)
+    )
+      return getHistory().reverse();
+    return options
+      .filter((o) =>
+        o.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+      )
+      .sort((a, b) => getHistoryIndex(b) - getHistoryIndex(a));
   }
-  $: autocomplete = results(options, query);
+  
+  let autocomplete: Stop[];
+  function update(...triggers: any[]) {
+    autocomplete = results();
+  }
+  update();
+  $: _ = update(options, query);
   let hideAutocomplete = true;
 
   function chooseStop(stop: Stop) {
-    query = stop.name
-    select(stop)
+    query = stop.name;
+    select(stop);
+    setLastSelectedStop(stop);
   }
+
+  {
+    const lastSelectedStop = getLastSelectedStop();
+    if (lastSelectedStop !== null) chooseStop(lastSelectedStop);
+  }
+
+  document.addEventListener("selectionchange", () => {
+    if (document.activeElement !== searchInput) return;
+    update();
+  });
 </script>
 
 <div class="search-container">
@@ -33,6 +68,8 @@
     bind:value={query}
     on:focus={() => (hideAutocomplete = false)}
     on:blur={() => setTimeout(() => (hideAutocomplete = true), 0)}
+    on:select={update}
+    bind:this={searchInput}
     autocomplete="off"
   />
   <ul class="autocomplete" style={hideAutocomplete ? "display:none;" : ""}>
