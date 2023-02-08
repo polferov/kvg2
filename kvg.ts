@@ -10,11 +10,14 @@ export async function lookup(query: string): Promise<Stop[]> {
     // <li stop="9052">Gerhart-Hauptmann-Schule</li>
     // <li stop="2387">Hauptbahnhof</li>
     // <li stop="2541">Hauptfeuerwache</li>
+    // <li id="">...</li>                           // this is returned when there are too many items to show
     // </ul>
 
     let lines = body.split('\n')
     lines = lines.slice(1) // remove <ul>
     lines = lines.slice(0, lines.length - 1) // remove </ul>
+    if (lines[lines.length - 1].startsWith('<li id=""'))
+        lines = lines.slice(0, lines.length - 1) // remove <li id="">...</li>
     lines = lines.map(l => l.replace(/^<li stop="/, "")) // remove <li stop="
     lines = lines.map(l => l.replace(/<\/li>$/, "")) // remove </li>
 
