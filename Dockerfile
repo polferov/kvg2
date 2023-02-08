@@ -17,4 +17,6 @@ FROM denoland/deno:alpine AS final
 WORKDIR /app
 COPY --from=frontend-build /build/frontend/build static
 COPY --from=backend-build /app/server.js .
-ENTRYPOINT [ "deno", "run", "--allow-net", "--allow-read", "--allow-write", "server.js" ]
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
+ENTRYPOINT [ "./entrypoint.sh" ]

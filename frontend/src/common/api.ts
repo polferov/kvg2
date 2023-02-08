@@ -1,6 +1,8 @@
 import type { AddStopsResult, Info, Stop } from '../../../types.ts'
 
-const url = "http://localhost:8000/api"
+const url = import.meta.env.MODE === "development" ? "http://localhost:8000/api" : "/api"
+
+// const a = import.meta.env
 
 export async function getStops(): Promise<Stop[]> {
     const resp = await fetch(`${url}/stops`)
