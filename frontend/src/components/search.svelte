@@ -1,23 +1,28 @@
 <script lang="ts">
   import type { Stop } from "../../../types";
+  import { getStops } from "../common/api";
+  import { cacheStops, getCachedStops } from "../common/storage";
+  export let select : (stop: Stop) => void
   let query = "";
-  let options: Stop[] = [
-    { id: "9052", name: "Gerhart-Hauptmann-Schule" },
-    { id: "2387", name: "Hauptbahnhof" },
-    { id: "2541", name: "Hauptfeuerwache" },
-    { id: "5371", name: "WaD Haus Sch&ouml;now" },
-  ];
+  let options: Stop[] = getCachedStops()
+
+  getStops().then((s) => {
+    console.log(s)
+    options = s;
+    cacheStops(s);
+  });
   
-  function results(q: string) {
-    return options.filter((o) =>
+  function results(opts : Stop[], q: string) {
+    return opts.filter((o) =>
       o.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
     );
   }
-  $: autocomplete = results(query);
+  $: autocomplete = results(options, query);
   let hideAutocomplete = true;
 
   function chooseStop(stop: Stop) {
-    console.log(stop);
+    query = stop.name
+    select(stop)
   }
 </script>
 
