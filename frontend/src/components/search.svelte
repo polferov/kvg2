@@ -40,7 +40,7 @@
       <li class="autocomplete-item">
         <button
           class="autocomplete-item-content"
-          on:focus={() => chooseStop(stop)}>{stop.name}</button
+          on:focus={() => chooseStop(stop)}>{@html stop.name}</button
         >
       </li>
     {/each}
