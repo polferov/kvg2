@@ -2,7 +2,7 @@ import { oak, path } from "./deps.ts";
 import { mapEndpoints } from "./endpoints.ts";
 
 
-const api = new oak.Router({prefix: "/api"})
+const api = new oak.Router({ prefix: "/api" })
 mapEndpoints(api)
 
 
@@ -29,4 +29,4 @@ app.use(async (context, next) => {
   }
 });
 
-await app.listen({port: 8000})
+await app.listen({ port: 8000 })
