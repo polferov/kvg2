@@ -1,7 +1,19 @@
 <script lang="ts">
   import type { Stop } from "../../../types";
   let query = "";
-  let autocomplete: Stop[] = [{ name: "a", id: "a" }];
+  let options: Stop[] = [
+    { id: "9052", name: "Gerhart-Hauptmann-Schule" },
+    { id: "2387", name: "Hauptbahnhof" },
+    { id: "2541", name: "Hauptfeuerwache" },
+    { id: "5371", name: "WaD Haus Sch&ouml;now" },
+  ];
+  
+  function results(q: string) {
+    return options.filter((o) =>
+      o.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+    );
+  }
+  $: autocomplete = results(query);
   let hideAutocomplete = true;
 
   function chooseStop(stop: Stop) {
