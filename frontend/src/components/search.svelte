@@ -122,7 +122,7 @@
   }
 
   .search-container {
-    padding-inline: 10px;
+    /* padding-inline: 10px; */
     position: relative;
   }
 
@@ -145,7 +145,7 @@
   }
 
   .autocomplete-item:hover {
-    background-color: #a00 !important;
+    background-color: #a00; 
     color: #fff;
   }
 
