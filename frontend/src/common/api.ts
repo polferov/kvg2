@@ -1,6 +1,8 @@
 import type { AddStopsResult, Info, Stop } from '../../../types.ts'
 
-const url = import.meta.env.MODE === "development" ? "http://localhost:8000/api" : "/api"
+
+// deno-lint-ignore no-explicit-any
+const url = (import.meta as any).env.MODE === "development" ? "http://localhost:8000/api" : "/api"
 
 // const a = import.meta.env
 
