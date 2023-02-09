@@ -9,7 +9,11 @@
 
   async function run() {
     while (true) {
-      if (selectedStop !== null) info = await getInfo(selectedStop);
+      const current = selectedStop;
+      if (current !== null) {
+        const infoTmp = await getInfo(current);
+        if (current.id === selectedStop?.id) info = infoTmp;
+      }
       let p = new Promise<void>((resolve) =>
         setTimeout(() => resolve(), 1000 - (Date.now() % 1000))
       );
@@ -18,9 +22,15 @@
   }
 
   run().then();
+
+  function select(stop: Stop) {
+    if (stop.id === selectedStop?.id) return;
+    selectedStop = stop;
+    info = null;
+  }
 </script>
 
-<Search select={(s) => (selectedStop = s)} />
+<Search {select} />
 {#if info !== null}
   <Info {info} />
 {/if}
