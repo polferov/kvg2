@@ -1,4 +1,7 @@
+import { dom } from "./deps.ts"
 import { Info, InfoMode, Stop, StopId } from "./types.ts"
+
+const parser = new dom.DOMParser()
 
 export async function lookup(query: string): Promise<Stop[]> {
     const url = `https://www.kvg-kiel.de/internetservice/services/lookup/autocomplete?query=${query}`
@@ -13,19 +16,15 @@ export async function lookup(query: string): Promise<Stop[]> {
     // <li id="">...</li>                           // this is returned when there are too many items to show
     // </ul>
 
-    let lines = body.split('\n')
-    lines = lines.slice(1) // remove <ul>
-    lines = lines.slice(0, lines.length - 1) // remove </ul>
-    if (lines[lines.length - 1].startsWith('<li id=""'))
-        lines = lines.slice(0, lines.length - 1) // remove <li id="">...</li>
-    lines = lines.map(l => l.replace(/^<li stop="/, "")) // remove <li stop="
-    lines = lines.map(l => l.replace(/<\/li>$/, "")) // remove </li>
+    const ul = parser.parseFromString(body, "text/html")!
 
-    const stops = lines.map(l => {
+    const lis = ul.getElementsByTagName("li").filter(li => li.getAttribute("stop") !== "")
+
+    const stops = lis.map(li => {
         return {
-            id: parseInt(l).toString(), // parse id from string like '2387">Hauptbahnhof'
-            name: l.replace(/^[0-9]+">/, "") // remove prefix like 2387">
-        } as Stop
+            id: li.getAttribute("stop")!,
+            name: li.innerText
+        }
     })
 
     return stops
