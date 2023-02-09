@@ -13,7 +13,7 @@ export async function getStops(): Promise<Stop[]> {
 }
 
 export async function getInfo(stop: Stop): Promise<Info> {
-    const resp = await fetch(`${url}/info/${stop.id}`)
+    const resp = await fetch(`${url}/info/${stop.id}/departure`)
     const info = await resp.json()
     return info as Info
 }
