@@ -9,12 +9,12 @@
       <li class="item">
         <span>{infoItem.patternText} -> {infoItem.direction}</span>
         <span>
-          {#if infoItem.actualTime !== infoItem.plannedTime}
+          {#if infoItem.actualTime !== infoItem.plannedTime && infoItem.plannedTime !== undefined}
             <span class="planned">
               {infoItem.plannedTime}
             </span>
           {/if}
-          <span>{infoItem.actualTime}</span>
+          <span>{infoItem.actualTime || infoItem.plannedTime}</span>
         </span>
         <span>{infoItem.actualRelativeTime}</span>
       </li>
