@@ -78,7 +78,11 @@
     type="search"
     class="search-input"
     bind:value={query}
-    on:focus={() => (hideAutocomplete = false)}
+    on:focus={() => {
+      hideAutocomplete = false;
+      if (query === "") return;
+      searchInput.select()
+    }}
     on:blur={onBlur}
     on:select={update}
     bind:this={searchInput}
