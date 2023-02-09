@@ -31,6 +31,21 @@
 </script>
 
 <Search {select} />
+<div class="status-bar">
+  <a href="settings"><img alt="Settings" src="icons/settings.png" /></a>
+</div>
 {#if info !== null}
   <Info {info} />
 {/if}
+
+<style>
+  .status-bar {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 10px;
+  }
+  .status-bar img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+</style>
