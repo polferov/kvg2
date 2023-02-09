@@ -20,3 +20,9 @@ steps:
     tags: |
       $(Build.BuildId)
       latest
+- task: AzureContainerAppsRC@0
+  inputs:
+    azureSubscription: 'kvg2'
+    imageToDeploy: 'docker.io/polferov/kvg2:$(Build.BuildId)'
+    containerAppName: 'kvg2'
+    resourceGroup: 'kvg2'
