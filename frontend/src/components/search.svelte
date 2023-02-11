@@ -25,14 +25,17 @@
 
   initStops();
 
-  function results() {
-    if (
+  function shouldShowHistory(): boolean {
+    return (
       query === "" ||
       (searchInput &&
         searchInput.selectionStart === 0 &&
         searchInput.selectionEnd === searchInput.value.length)
-    )
-      return getHistory().reverse();
+    );
+  }
+
+  function results() {
+    if (shouldShowHistory()) return getHistory().reverse();
     const result = options
       .filter((o) =>
         o.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
@@ -107,11 +110,10 @@
         >
       </li>
     {/each}
-    {#if autocomplete.length > 0}
+    {#if autocomplete.length > 0 && !shouldShowHistory()}
       <li class="autocomplete-item">
-        <button
-          class="autocomplete-item-content"
-          on:focus={trySearch}>search...</button
+        <button class="autocomplete-item-content" on:focus={trySearch}
+          >search...</button
         >
       </li>
     {/if}
