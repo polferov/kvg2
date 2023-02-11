@@ -112,7 +112,10 @@
     {/each}
     {#if autocomplete.length > 0 && !shouldShowHistory()}
       <li class="autocomplete-item">
-        <button class="autocomplete-item-content" on:focus={trySearch}
+        <button class="autocomplete-item-content" on:focus={()=> {
+          trySearch().then()
+          searchInput.focus()
+        }}
           >search...</button
         >
       </li>
