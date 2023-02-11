@@ -107,6 +107,14 @@
         >
       </li>
     {/each}
+    {#if autocomplete.length > 0}
+      <li class="autocomplete-item">
+        <button
+          class="autocomplete-item-content"
+          on:focus={trySearch}>search...</button
+        >
+      </li>
+    {/if}
   </ul>
 </div>
 
