@@ -20,3 +20,11 @@ steps:
     tags: |
       $(Build.BuildId)
       latest
+- task: AzureContainerAppsRC@0
+  inputs:
+    azureSubscription: 'kvg2'
+    imageToDeploy: 'docker.io/polferov/kvg2'
+    containerAppName: 'kvg2'
+    resourceGroup: 'kvg2'
+    containerAppEnvironment: 'kvg2'
+    targetPort: '8000'
