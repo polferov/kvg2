@@ -10,7 +10,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: env
 - task: Docker@2
   inputs:
     containerRegistry: 'dockerhub-polferov'
