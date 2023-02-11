@@ -20,3 +20,11 @@ steps:
     tags: |
       $(Build.BuildId)
       latest
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'kvg2'
+    scriptType: 'batch'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az config set extension.use_dynamic_install=yes_without_prompt
+      az containerapp revision restart --name kvg2 --resource-group kvg2 --revision kvg2--a
