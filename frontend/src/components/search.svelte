@@ -39,8 +39,7 @@
       )
       .sort((a, b) => getHistoryIndex(b) - getHistoryIndex(a));
 
-    if (result.length === 0) {
-    }
+    if (result.length === 0) trySearch().then();
 
     return result;
   }
