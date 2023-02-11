@@ -77,7 +77,7 @@
   }
 
   async function trySearch() {
-    if (query.length > 2 && (await tryAddStop(query))) initStops();
+    if (query.length > 0 && (await tryAddStop(query))) initStops();
   }
 </script>
 
