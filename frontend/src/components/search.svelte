@@ -33,11 +33,16 @@
         searchInput.selectionEnd === searchInput.value.length)
     )
       return getHistory().reverse();
-    return options
+    const result = options
       .filter((o) =>
         o.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())
       )
       .sort((a, b) => getHistoryIndex(b) - getHistoryIndex(a));
+
+    if (result.length === 0) {
+    }
+
+    return result;
   }
 
   let autocomplete: Stop[];
@@ -71,6 +76,10 @@
     if (document.activeElement === requestSearchElement) return;
     hideAutocomplete = true;
   }
+
+  async function trySearch() {
+    if (query.length > 2 && (await tryAddStop(query))) initStops();
+  }
 </script>
 
 <div class="search-container">
@@ -81,7 +90,7 @@
     on:focus={() => {
       hideAutocomplete = false;
       if (query === "") return;
-      searchInput.select()
+      searchInput.select();
     }}
     on:blur={onBlur}
     on:select={update}
@@ -97,17 +106,6 @@
         >
       </li>
     {/each}
-    {#if autocomplete.length === 0 && query.length > 2}
-      <li class="autocomplete-item">
-        <button
-          bind:this={requestSearchElement}
-          class="autocomplete-item-content"
-          on:focus={async () => {
-            if (await tryAddStop(query)) initStops();
-          }}>search</button
-        >
-      </li>
-    {/if}
   </ul>
 </div>
 
@@ -145,7 +143,7 @@
   }
 
   .autocomplete-item:hover {
-    background-color: #a00; 
+    background-color: #a00;
     color: #fff;
   }
 
