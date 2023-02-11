@@ -10,6 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: env
 - task: Docker@2
   inputs:
     containerRegistry: 'dockerhub-polferov'
@@ -26,5 +27,5 @@ steps:
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az config set extension.use_dynamic_install=yes_without_prompt
+      az extension add --upgrade --name containerapp
       az containerapp revision restart --name kvg2 --resource-group kvg2 --revision kvg2--a
