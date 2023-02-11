@@ -23,7 +23,7 @@ steps:
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'kvg2'
-    scriptType: 'batch'
+    scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
       az config set extension.use_dynamic_install=yes_without_prompt
