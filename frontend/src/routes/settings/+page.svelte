@@ -1,5 +1,6 @@
 <script>
   import Back from "../../components/back.svelte";
+  import ShowTimeInMinutesPicker from "../../components/showTimeInMinutesPicker.svelte";
   import ThemePicker from "../../components/themePicker.svelte";
 </script>
 
@@ -10,6 +11,8 @@
 <h2>Theme</h2>
 
 <ThemePicker />
+
+<ShowTimeInMinutesPicker />
 
 <h2><a href="tags/">Tags</a></h2>
 <p>

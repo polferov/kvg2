@@ -5,6 +5,7 @@ const lastSelectedStopKey = "storage__last-stop"
 const historyKey = "storage__history"
 const tagsKey = "storage__tags"
 const themeKey = "storage__theme"
+const showTimeInMinutesKey = "storage__time-in-min"
 
 export function getCachedStops(): Stop[] {
     const json = localStorage.getItem(stopsCacheKey)
@@ -107,4 +108,14 @@ export function getTheme(): Theme {
 
 export function setTheme(theme: Theme) {
     localStorage.setItem(themeKey, theme)
+}
+
+export function showTimeInMinutesEnabled(): boolean {
+    const json = localStorage.getItem(showTimeInMinutesKey) || "false"
+    return JSON.parse(json) === true
+}
+
+export function setShowTimeInMinutesEnabled(value: boolean) {
+    const json = JSON.stringify(value)
+    localStorage.setItem(showTimeInMinutesKey, json)
 }

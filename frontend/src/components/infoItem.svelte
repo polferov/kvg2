@@ -1,12 +1,19 @@
 <script lang="ts">
   import type { InfoItem as InfoItemType } from "../../../types";
-  import { getTagsOf } from "../common/storage";
+  import { getTagsOf, showTimeInMinutesEnabled } from "../common/storage";
   export let item: InfoItemType;
   let tags = getTagsOf(item.patternText);
+  let showInMins = showTimeInMinutesEnabled();
+  function relativeTime(relative: number): string {
+    if (!showInMins) return relative.toString();
+    return `${Math.floor(relative / 60)}:${relative % 60}`;
+  }
 </script>
 
 <li class="item">
-  <div><span class="pattern">{item.patternText}</span><span>{item.direction}</span></div>
+  <div>
+    <span class="pattern">{item.patternText}</span><span>{item.direction}</span>
+  </div>
   <div class="times-and-tags">
     <div class="times">
       {#if item.actualTime !== item.plannedTime && item.plannedTime !== undefined}
@@ -26,14 +33,16 @@
       </ul>
     {/if}
   </div>
-  <div class="relative-time"><span>{item.actualRelativeTime}</span></div>
+  <div class="relative-time">
+    <span>{relativeTime(item.actualRelativeTime)}</span>
+  </div>
 </li>
 
 <style>
   .item {
-    margin-bottom: .25rem;
-    padding-block: .5rem;
-    padding-inline: .75rem;
+    margin-bottom: 0.25rem;
+    padding-block: 0.5rem;
+    padding-inline: 0.75rem;
     border: var(--brd-base);
     border-radius: var(--brd-r-info);
   }
