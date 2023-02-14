@@ -34,8 +34,8 @@
     margin-bottom: .25rem;
     padding-block: .5rem;
     padding-inline: .75rem;
-    border: solid 2px;
-    border-radius: 1rem;
+    border: var(--brd-base);
+    border-radius: var(--brd-r-info);
   }
 
   .planned {

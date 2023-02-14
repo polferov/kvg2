@@ -67,10 +67,10 @@
   }
 
   .tag {
-    border: solid 2px;
+    border: var(--brd-base);
     margin-bottom: 1rem;
     padding: .5rem;
-    border-radius: .5rem;
+    border-radius: var(--brd-r-base);
   }
 
   .labeled-input {

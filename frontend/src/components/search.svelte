@@ -134,12 +134,12 @@
   }
 
   .search-input {
-    border: solid 2px;
+    border: var(--brd-base);
     padding-inline: 0.75rem;
     display: block;
     background-color: inherit;
     height: 2rem;
-    border-radius: 0.5rem;
+    border-radius: var(--brd-r-base);
     font-size: inherit;
     color: inherit;
   }
@@ -162,7 +162,7 @@
     width: auto;
     margin-bottom: 2px;
     height: auto;
-    border: solid 2px;
+    border: var(--brd-base);
   }
 
   .autocomplete-item:hover {

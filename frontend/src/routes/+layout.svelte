@@ -18,6 +18,9 @@
     --clr-link: #000;
     --clr-link-hvr: #3d64ff;
     --settings-ico-filter: ;
+    --brd-r-base: .5rem;
+    --brd-r-info: 1rem;
+    --brd-base: solid 2px;
   }
 
   :global(.amoled) {

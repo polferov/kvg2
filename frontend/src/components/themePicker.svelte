@@ -24,8 +24,8 @@
 
 <style>
   .container {
-    border: solid 2px;
-    border-radius: 0.5rem;
+    border: var(--brd-base);
+    border-radius: var(--brd-r-base);
   }
 
   .option{
