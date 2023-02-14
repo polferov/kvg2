@@ -1,9 +1,17 @@
+FROM alpine/git AS GETHASH
+WORKDIR /app
+COPY .git .git
+RUN git rev-parse HEAD > /hash
+
 FROM node:alpine AS frontend-build 
 WORKDIR /build/frontend
 COPY frontend/package.json .
 RUN npm i
+COPY --from=GETHASH /hash /hash
 COPY types.ts ..
 COPY frontend/ ./
+RUN sed -i "s/::COMMIT::/$(cat /hash)/g" src/routes/settings/+page.svelte
+RUN sed -i "s/::DATE::/$(date)/g" src/routes/settings/+page.svelte
 RUN npm run build
 
 FROM denoland/deno:alpine as backend-build
