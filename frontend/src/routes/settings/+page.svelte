@@ -10,7 +10,7 @@
 <a href="https://github.com/polferov/kvg2">view on github</a>
 
 <div>
-    <p>version #::COMMIT::</p>
+    <p>commit <a href="https://github.com/polferov/kvg2/tree/::COMMIT::">::COMMIT::</a></p>
     <p>built ::DATE::</p>
 </div>
 
