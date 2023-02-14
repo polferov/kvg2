@@ -3,6 +3,7 @@ import type { Stop } from '../../../types.ts'
 const stopsCacheKey = "cache__stops"
 const lastSelectedStopKey = "storage__last-stop"
 const historyKey = "storage__history"
+const tagsKey = "storage__tags"
 
 export function getCachedStops(): Stop[] {
     const json = localStorage.getItem(stopsCacheKey)
@@ -56,4 +57,26 @@ export function getHistory(): Stop[] {
 export function getHistoryIndex(stop: Stop) {
     const history = getHistory()
     return history.findLastIndex(s => s.id === stop.id)
+}
+
+export interface Tag {
+    routes: string[]
+    color: string
+}
+
+export function getTags(): Tag[] {
+    const json = localStorage.getItem(tagsKey)
+    if (json === null)
+        return []
+    try {
+        return JSON.parse(json)
+    }
+    catch {
+        return []
+    }
+}
+
+export function setTags(tags: Tag[]) {
+    const json = JSON.stringify(tags)
+    localStorage.setItem(tagsKey, json)
 }
