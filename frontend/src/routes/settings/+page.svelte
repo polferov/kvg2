@@ -1,10 +1,15 @@
 <script>
   import Back from "../../components/back.svelte";
+  import ThemePicker from "../../components/themePicker.svelte";
 </script>
 
 <Back />
 
 <h1>Settings</h1>
+
+<h2>Theme</h2>
+
+<ThemePicker />
 
 <h2><a href="tags/">Tags</a></h2>
 <p>

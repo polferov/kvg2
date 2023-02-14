@@ -137,10 +137,11 @@
     border: solid 2px;
     padding-inline: 0.75rem;
     display: block;
-
+    background-color: inherit;
     height: 2rem;
     border-radius: 0.5rem;
     font-size: inherit;
+    color: inherit;
   }
 
   .autocomplete {
@@ -150,7 +151,7 @@
     margin-top: 2px;
     position: absolute;
     width: 100%;
-    background-color: #fff;
+    background-color: var(--clr-bg);
     top: 100%;
     right: 0;
     left: 0;
@@ -161,12 +162,11 @@
     width: auto;
     margin-bottom: 2px;
     height: auto;
-    color: #000;
     border: solid 2px;
   }
 
   .autocomplete-item:hover {
-    background-color: #a00;
+    background-color: var(--clr-red);
   }
 
   .autocomplete-item-content {
@@ -177,5 +177,6 @@
     padding-inline: 0;
     padding-block: .25rem;
     font-size: inherit;
+    color: inherit;
   }
 </style>

@@ -4,6 +4,7 @@ const stopsCacheKey = "cache__stops"
 const lastSelectedStopKey = "storage__last-stop"
 const historyKey = "storage__history"
 const tagsKey = "storage__tags"
+const themeKey = "storage__theme"
 
 export function getCachedStops(): Stop[] {
     const json = localStorage.getItem(stopsCacheKey)
@@ -86,4 +87,24 @@ export function setTags(tags: Tag[]) {
 
 export function getTagsOf(route: string): Tag[] {
     return tagsCache.filter(t => t.routes.includes(route))
+}
+
+export enum Theme {
+    Default = "default",
+    Amoled = "amoled"
+}
+
+export function getThemes(): Theme[] {
+    return [Theme.Default, Theme.Amoled]
+}
+
+export function getTheme(): Theme {
+    const theme = localStorage.getItem(themeKey)
+    if (getThemes().includes(theme as Theme))
+        return theme as Theme
+    return Theme.Default
+}
+
+export function setTheme(theme: Theme) {
+    localStorage.setItem(themeKey, theme)
 }

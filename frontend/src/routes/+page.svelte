@@ -32,7 +32,7 @@
 
 <Search {select} />
 <div class="status-bar">
-  <a href="settings/"><img alt="Settings" src="icons/settings.png" /></a>
+  <a href="settings/"><img alt="Settings" src="icons/settings.png" class="settings-ico" /></a>
 </div>
 {#if info !== null}
   <Info {info} />
@@ -47,5 +47,8 @@
   .status-bar img {
     width: 1.5rem;
     height: 1.5rem;
+  }
+  .settings-ico {
+    filter: var(--settings-ico-filter);
   }
 </style>
