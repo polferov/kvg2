@@ -32,7 +32,7 @@
 
 <Search {select} />
 <div class="status-bar">
-  <a href="settings"><img alt="Settings" src="icons/settings.png" /></a>
+  <a href="settings/"><img alt="Settings" src="icons/settings.png" /></a>
 </div>
 {#if info !== null}
   <Info {info} />
