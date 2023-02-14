@@ -38,13 +38,48 @@
 </script>
 
 <Back />
-<ul>
+<p>
+  here you can tag routes.
+</p>
+<p>
+  routes is a space, comma, or semicolon separated list of routes. color is a css color (e.g. red or #ff22bd)
+</p>
+<ul class="tags">
   {#each models as model}
-    <li>
-      <span>routes</span>
-      <input on:keyup={save} bind:value={model.routes} />
-      <span>color</span>
-      <input on:keyup={save} bind:value={model.color} />
+    <li class="tag">
+      <div class="labeled-input">
+        <span>routes</span>
+        <input on:keyup={save} bind:value={model.routes} />
+      </div>
+      <div class="labeled-input">
+        <span>color</span>
+        <input on:keyup={save} bind:value={model.color} />
+      </div>
     </li>
   {/each}
 </ul>
+
+<style>
+  .tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tag {
+    border: solid 2px;
+    margin-bottom: 1rem;
+    padding: .5rem;
+    border-radius: .5rem;
+  }
+
+  .labeled-input {
+    margin-block: .5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .labeled-input * {
+    display: block;
+  }
+</style>
