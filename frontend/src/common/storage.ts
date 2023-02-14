@@ -1,4 +1,4 @@
-import type { Stop } from '../../../types.ts'
+import type { Stop } from '../../../types'
 
 const stopsCacheKey = "cache__stops"
 const lastSelectedStopKey = "storage__last-stop"
