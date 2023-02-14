@@ -130,12 +130,15 @@
     position: relative;
     font-size: 1.2rem;
     // padding-top: 4rem;
+    display: flex;
+    flex-direction: column;
   }
 
   .search-input {
     border: solid 2px;
     padding-inline: 0.75rem;
-    width: 100%;
+    display: block;
+
     height: 2rem;
     border-radius: 0.5rem;
     font-size: inherit;
@@ -173,7 +176,7 @@
     text-align: left;
     margin: 0;
     padding-inline: 0;
-    padding-block: 0.1rem;
+    padding-block: .25rem;
     font-size: inherit;
   }
 </style>
