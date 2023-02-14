@@ -12,6 +12,8 @@
 
 <ThemePicker />
 
+<h2>Miscellaneous</h2>
+
 <ShowTimeInMinutesPicker />
 
 <h2><a href="tags/">Tags</a></h2>

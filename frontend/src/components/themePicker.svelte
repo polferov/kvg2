@@ -24,11 +24,13 @@
 
 <style>
   .container {
+    margin-block: 0.5rem;
     border: var(--brd-base);
     border-radius: var(--brd-r-base);
+    padding: 0.25rem;
   }
 
-  .option{
+  .option {
     font-size: 1.2rem;
   }
 </style>
