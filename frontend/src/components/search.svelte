@@ -125,47 +125,45 @@
   </ul>
 </div>
 
-<style>
-  .search-container * {
-    list-style: none;
-    border: none;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    font-size: 1.1rem;
-  }
-
+<style lang="scss">
   .search-container {
-    /* padding-inline: 10px; */
     position: relative;
+    font-size: 1.2rem;
   }
 
-  .autocomplete-item {
-    background: #fff;
-    width: calc(100% - 10px);
-    padding: 5px;
-    margin-bottom: 2px;
-    color: #000;
-    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  .search-input {
+    border: solid 2px;
+    padding-inline: 0.75rem;
+    width: 100%;
+    height: 2rem;
+    border-radius: 0.5rem;
+    font-size: inherit;
   }
 
   .autocomplete {
-    background: #aaa;
-    width: calc(100% - 4px);
-    border: 2px solid #aaa;
-    border-top: none;
-    border-bottom: 1px solid #aaa;
-    /* display: none; */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 2px;
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    top:100%;
+    right: 0;
+    left: 0;
+  }
+
+  .autocomplete-item {
+    @extend .search-input;
+    width: auto;
+    margin-bottom: 2px;
+    height: auto;
+    color: #000;
+    border: solid 2px;
   }
 
   .autocomplete-item:hover {
     background-color: #a00;
-    color: #fff;
-  }
-
-  .search-input {
-    border: 2px inset;
-    padding-left: 0.25rem;
   }
 
   .autocomplete-item-content {
@@ -173,5 +171,8 @@
     background-color: transparent;
     text-align: left;
     margin: 0;
+    padding-inline: 0;
+    padding-block: .1rem;
+    font-size: inherit;
   }
 </style>
