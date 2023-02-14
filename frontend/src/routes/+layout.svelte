@@ -1,9 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-    onMount(()=> {
-        // console.log(document.body)
-    })
+  onMount(() => {
+    // do something with dark mode
+    // console.log(document.body)
+  });
 </script>
 
 <slot />
