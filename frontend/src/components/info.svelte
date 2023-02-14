@@ -15,6 +15,6 @@
 <style>
   ul {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
   }
 </style>

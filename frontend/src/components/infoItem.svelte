@@ -6,9 +6,9 @@
 </script>
 
 <li class="item">
-  <span>{item.patternText} -> {item.direction}</span>
+  <div><span class="pattern">{item.patternText}</span><span>{item.direction}</span></div>
   <div class="times-and-tags">
-    <div>
+    <div class="times">
       {#if item.actualTime !== item.plannedTime && item.plannedTime !== undefined}
         <span class="planned">
           {item.plannedTime}
@@ -17,7 +17,7 @@
       <span>{item.actualTime || item.plannedTime}</span>
     </div>
     {#if tags.length > 0}
-      <ul>
+      <ul class="tags">
         {#each tags as tag}
           <li>
             <div class="tag" style="background-color: {tag.color};" />
@@ -26,16 +26,16 @@
       </ul>
     {/if}
   </div>
-  <span>{item.actualRelativeTime}</span>
+  <div class="relative-time"><span>{item.actualRelativeTime}</span></div>
 </li>
 
 <style>
-  li {
-    margin-bottom: 1rem;
-  }
-
-  li > span {
-    display: block;
+  .item {
+    margin-bottom: .25rem;
+    padding-block: .5rem;
+    padding-inline: .75rem;
+    border: solid 2px;
+    border-radius: 1rem;
   }
 
   .planned {
@@ -49,17 +49,22 @@
     display: inline-block;
   }
 
-  ul {
-    display: inline;
+  .tags {
+    list-style: none;
+    display: inline-block;
   }
 
-  ul li {
-    list-style: none;
+  .tags li {
     display: inline;
   }
 
   .times-and-tags {
     display: flex;
     justify-content: space-between;
+  }
+
+  .pattern {
+    font-weight: 900;
+    margin-right: 1rem;
   }
 </style>
