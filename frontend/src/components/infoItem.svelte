@@ -64,7 +64,7 @@
   }
 
   .pattern {
-    font-weight: 900;
+    font-weight: 700;
     margin-right: 1rem;
   }
 </style>

@@ -8,3 +8,9 @@
 </script>
 
 <slot />
+
+<style>
+  :global(:root, :root *) {
+    font-family: 'sans';
+  }
+</style>
