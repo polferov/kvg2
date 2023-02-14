@@ -129,7 +129,6 @@
   .search-container {
     position: relative;
     font-size: 1.2rem;
-    // padding-top: 4rem;
     display: flex;
     flex-direction: column;
   }
