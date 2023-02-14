@@ -64,6 +64,8 @@ export interface Tag {
     color: string
 }
 
+let tagsCache = getTags()
+
 export function getTags(): Tag[] {
     const json = localStorage.getItem(tagsKey)
     if (json === null)
@@ -79,4 +81,9 @@ export function getTags(): Tag[] {
 export function setTags(tags: Tag[]) {
     const json = JSON.stringify(tags)
     localStorage.setItem(tagsKey, json)
+    tagsCache = tags
+}
+
+export function getTagsOf(route: string): Tag[] {
+    return tagsCache.filter(t => t.routes.includes(route))
 }
