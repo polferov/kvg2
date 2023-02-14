@@ -17,7 +17,7 @@
   function initStops() {
     getStops().then((s) => {
       s.sort((a, b) => a.name - b.name);
-      console.log(s);
+      // console.log(s);
       options = s;
       cacheStops(s);
     });

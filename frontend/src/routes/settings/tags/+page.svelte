@@ -29,7 +29,6 @@
   addTrivial();
 
   function save() {
-    console.log("saving");
     const tags = models.filter(isNonTrivial).map(fromModel);
     setTags(tags);
     if (tags.length === models.length) {

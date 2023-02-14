@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
     onMount(()=> {
-        console.log(document.body)
+        // console.log(document.body)
     })
 </script>
 
