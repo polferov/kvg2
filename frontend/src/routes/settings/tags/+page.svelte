@@ -1,5 +1,6 @@
 <script lang="ts">
   import { getTags, setTags, type Tag } from "../../../common/storage";
+  import Back from "../../../components/back.svelte";
 
   interface TagModel {
     routes: string;
@@ -37,6 +38,7 @@
   }
 </script>
 
+<Back />
 <ul>
   {#each models as model}
     <li>
