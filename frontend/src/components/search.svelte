@@ -87,7 +87,7 @@
 
 <div class="search-container">
   <input
-    type="search"
+    type="text"
     class="search-input"
     bind:value={query}
     on:focus={() => {
@@ -95,6 +95,7 @@
       if (query === "") return;
       searchInput.select();
     }}
+    on:contextmenu={e => e.preventDefault()}
     on:blur={onBlur}
     on:select={update}
     bind:this={searchInput}
@@ -128,6 +129,7 @@
   .search-container {
     position: relative;
     font-size: 1.2rem;
+    // padding-top: 4rem;
   }
 
   .search-input {
@@ -147,7 +149,7 @@
     position: absolute;
     width: 100%;
     background-color: #fff;
-    top:100%;
+    top: 100%;
     right: 0;
     left: 0;
   }
@@ -171,7 +173,7 @@
     text-align: left;
     margin: 0;
     padding-inline: 0;
-    padding-block: .1rem;
+    padding-block: 0.1rem;
     font-size: inherit;
   }
 </style>
