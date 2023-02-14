@@ -21,6 +21,7 @@
     --brd-r-base: .5rem;
     --brd-r-info: 1rem;
     --brd-base: solid 2px;
+    --clr-not-bg: #ddd;
   }
 
   :global(.amoled) {
@@ -28,6 +29,7 @@
     --clr-txt: #fff;
     --clr-link: #fff;
     --settings-ico-filter: invert();
+    --clr-not-bg: #333;
   }
 
   :global(body) {

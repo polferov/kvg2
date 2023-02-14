@@ -13,6 +13,10 @@
     border: none;
     width: 2rem;
     height: 2rem;
-    background: #aaa;
+    background: var(--clr-not-bg);
+    color: var(--clr-txt)
+  }
+  .back:hover {
+    background: var(--clr-link-hvr)
   }
 </style>
