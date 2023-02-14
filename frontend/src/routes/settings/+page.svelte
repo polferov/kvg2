@@ -4,12 +4,24 @@
 
 <Back />
 
-<h1>settings</h1>
+<h1>Settings</h1>
 
-<a href="tags/">Tags</a>
-<a target="_blank" rel="noreferrer" href="https://github.com/polferov/kvg2"
-  >view on github</a
->
+<h2><a href="tags/">Tags</a></h2>
+<p>
+  here you can add color tags to you busses so it's easier to find then in the
+  list
+</p>
+
+<h2>
+  <a target="_blank" rel="noreferrer" href="https://github.com/polferov/kvg2"
+    >View on GitHub</a
+  >
+</h2>
+<p>
+  view this project and its source code on GitHub. You are free to contribute.
+</p>
+
+<h2>Build info</h2>
 
 <div>
   <p>
@@ -23,7 +35,4 @@
 </div>
 
 <style>
-  a {
-    display: block;
-  }
 </style>
