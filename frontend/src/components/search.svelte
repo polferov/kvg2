@@ -58,6 +58,7 @@
     query = stop.name;
     select(stop);
     setLastSelectedStop(stop);
+    hideAutocomplete = true;
   }
 
   {
@@ -70,13 +71,11 @@
     update();
   });
 
-  let requestSearchElement: HTMLButtonElement;
-  async function onBlur() {
-    const p = new Promise<void>((resolve) => setTimeout(() => resolve(), 0));
-    await p;
-    if (document.activeElement === requestSearchElement) return;
-    hideAutocomplete = true;
-  }
+  let searchContainer: HTMLDivElement;
+  document.addEventListener("click", (e) => {
+    if (!hideAutocomplete && !searchContainer.contains(e.target as any))
+      hideAutocomplete = true;
+  });
 
   async function trySearch() {
     if (query.length === 0) return;
@@ -85,7 +84,7 @@
   }
 </script>
 
-<div class="search-container">
+<div bind:this={searchContainer} class="search-container">
   <input
     type="text"
     class="search-input"
@@ -95,8 +94,7 @@
       if (query === "") return;
       searchInput.select();
     }}
-    on:contextmenu={e => e.preventDefault()}
-    on:blur={onBlur}
+    on:contextmenu={(e) => e.preventDefault()}
     on:select={update}
     bind:this={searchInput}
     autocomplete="off"
@@ -106,19 +104,14 @@
       <li class="autocomplete-item">
         <button
           class="autocomplete-item-content"
-          on:focus={() => chooseStop(stop)}>{stop.name}</button
+          on:click={() => chooseStop(stop)}>{stop.name}</button
         >
       </li>
     {/each}
     {#if autocomplete.length > 0 && !shouldShowHistory()}
       <li class="autocomplete-item">
-        <button
-          class="autocomplete-item-content"
-          bind:this={requestSearchElement}
-          on:focus={() => {
-            trySearch().then();
-            searchInput.focus();
-          }}>search...</button
+        <button class="autocomplete-item-content" on:click={trySearch}
+          >search...</button
         >
       </li>
     {/if}
@@ -163,6 +156,8 @@
     margin-bottom: 2px;
     height: auto;
     border: var(--brd-base);
+    display: flex;
+    flex-direction: column;
   }
 
   .autocomplete-item:hover {
@@ -175,7 +170,7 @@
     text-align: left;
     margin: 0;
     padding-inline: 0;
-    padding-block: .25rem;
+    padding-block: 0.25rem;
     font-size: inherit;
     color: inherit;
   }
