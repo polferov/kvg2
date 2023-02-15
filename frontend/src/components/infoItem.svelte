@@ -5,6 +5,7 @@
   let tags = getTagsOf(item.patternText);
   let showInMins = showTimeInMinutesEnabled();
   function relativeTime(relative: number): string {
+    if (relative < 0) return `-${relativeTime(-relative)}`;
     if (!showInMins) return relative.toString();
     return `${Math.floor(relative / 60)}:${relative % 60}`;
   }
