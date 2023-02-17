@@ -2,7 +2,7 @@
   import type { InfoItem as InfoItemType } from "../../../types";
   import { getTagsOf, showTimeInMinutesEnabled } from "../common/storage";
   export let item: InfoItemType;
-  let tags = getTagsOf(item.patternText);
+  $: tags = getTagsOf(item.patternText);
   let showInMins = showTimeInMinutesEnabled();
   function relativeTime(relative: number): string {
     if (relative < 0) return `-${relativeTime(-relative)}`;
