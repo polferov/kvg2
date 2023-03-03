@@ -43,6 +43,8 @@
 
     if (result.length === 0) trySearch().then();
 
+    result.splice(10);
+
     return result;
   }
 
@@ -85,7 +87,7 @@
 </script>
 
 <div bind:this={searchContainer} class="search-container">
-  <input class="autofocus-catcher" type="text"/>
+  <input class="autofocus-catcher" type="text" />
   <input
     type="text"
     class="search-input"
@@ -126,8 +128,7 @@
     display: flex;
     flex-direction: column;
   }
-  .autofocus-catcher 
-  {
+  .autofocus-catcher {
     position: absolute;
     width: 1px;
     height: 1px;
