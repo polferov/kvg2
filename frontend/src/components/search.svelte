@@ -48,7 +48,9 @@
 
   let autocomplete: Stop[];
   function update(...triggers: any[]) {
-    autocomplete = results().splice(10);
+    let res = results();
+    res.splice(10);
+    autocomplete = res;
   }
   update();
   $: _ = update(options, query);
