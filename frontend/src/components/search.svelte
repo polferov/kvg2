@@ -43,14 +43,12 @@
 
     if (result.length === 0) trySearch().then();
 
-    result.splice(10);
-
     return result;
   }
 
   let autocomplete: Stop[];
   function update(...triggers: any[]) {
-    autocomplete = results();
+    autocomplete = results().splice(10);
   }
   update();
   $: _ = update(options, query);
