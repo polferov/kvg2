@@ -87,7 +87,7 @@
 </script>
 
 <div bind:this={searchContainer} class="search-container">
-  <input class="autofocus-catcher" type="text" />
+  <input class="autofocus-catcher" autofocus="true" type="hidden" />
   <input
     type="text"
     class="search-input"
