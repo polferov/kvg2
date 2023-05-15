@@ -49,7 +49,7 @@
   let autocomplete: Stop[];
   function update(...triggers: any[]) {
     let res = results();
-    res.splice(15);
+    res.splice(12);
     autocomplete = res;
   }
   update();
