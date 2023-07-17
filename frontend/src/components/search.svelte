@@ -43,14 +43,14 @@
 
     if (result.length === 0) trySearch().then();
 
-    result.splice(10);
-
     return result;
   }
 
   let autocomplete: Stop[];
   function update(...triggers: any[]) {
-    autocomplete = results();
+    let res = results();
+    res.splice(12);
+    autocomplete = res;
   }
   update();
   $: _ = update(options, query);
@@ -87,7 +87,7 @@
 </script>
 
 <div bind:this={searchContainer} class="search-container">
-  <input class="autofocus-catcher" type="text" />
+  <input autofocus="true" type="hidden" />
   <input
     type="text"
     class="search-input"
@@ -127,13 +127,6 @@
     font-size: 1.2rem;
     display: flex;
     flex-direction: column;
-  }
-  .autofocus-catcher {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    left: -99999px;
-    top: -99999px;
   }
 
   .search-input {
