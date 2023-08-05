@@ -10,15 +10,15 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: docker buildx create --use
 - task: Docker@2
   inputs:
     containerRegistry: 'dockerhub-polferov'
-    repository: 'polferov/kvg2'
-    command: 'build'
-    Dockerfile: 'Dockerfile'
-    buildContext: '.'
-    tags: |
-      $(Build.BuildId)
-      latest
-    arguments: '--platform linux/amd64,linux/arm64/v8 --push'
+    command: 'login'
+- script: |
+    docker buildx creaate --use
+    docker build \
+      --platform linux/amd64,linux/arm64/v8 \
+      -t polferov/kvg2:latest \
+      -t polferov/kvg2:$(Build.BuildId) \
+      --push \
+      .
