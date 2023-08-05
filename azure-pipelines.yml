@@ -15,9 +15,9 @@ steps:
     containerRegistry: 'dockerhub-polferov'
     command: 'login'
 - script: |
-    docker run --privileged --rm tonistiigi/binfmt --install arm64
-    docker buildx create --use && \
-    docker build \
+    # docker run --privileged --rm tonistiigi/binfmt --install arm64
+    docker buildx create --use
+    docker buildx build \
       --platform linux/amd64,linux/arm64/v8 \
       -t polferov/kvg2:latest \
       -t polferov/kvg2:$(Build.BuildId) \
