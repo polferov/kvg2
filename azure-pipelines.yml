@@ -15,7 +15,7 @@ steps:
     containerRegistry: 'dockerhub-polferov'
     command: 'login'
 - script: |
-    # docker run --privileged --rm tonistiigi/binfmt --install arm64
+    docker run --privileged --rm tonistiigi/binfmt --install arm64
     docker buildx create --use && \
     docker build \
       --platform linux/amd64,linux/arm64/v8 \
