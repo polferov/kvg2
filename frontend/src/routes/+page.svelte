@@ -9,15 +9,19 @@
 
   async function run() {
     while (true) {
-      const current = selectedStop;
-      if (current !== null) {
-        const infoTmp = await getInfo(current);
-        if (current.id === selectedStop?.id) info = infoTmp;
+      try {
+        const current = selectedStop;
+        if (current !== null) {
+          const infoTmp = await getInfo(current);
+          if (current.id === selectedStop?.id) info = infoTmp;
+        }
+        let p = new Promise<void>((resolve) =>
+          setTimeout(() => resolve(), 1000 - (Date.now() % 1000))
+        );
+        await p;
+      } catch (_) {
+        // ignore
       }
-      let p = new Promise<void>((resolve) =>
-        setTimeout(() => resolve(), 1000 - (Date.now() % 1000))
-      );
-      await p;
     }
   }
 
