@@ -7,20 +7,39 @@
 
   let info: InfoType | null = null;
 
+  async function run() {
+    while (true) {
+      try {
+        const current = selectedStop;
+        if (current !== null) {
+          const infoTmp = await getInfo(current);
+          if (current.id === selectedStop?.id) info = infoTmp;
+        }
+        let p = new Promise<void>((resolve) =>
+          setTimeout(() => resolve(), 1000 - (Date.now() % 1000))
+        );
+        await p;
+      } catch (_) {
+        // ignore
+      }
+    }
+  }
+
+  run().then();
 
   var highest = 0;
-  setInterval(() => {
+setInterval(() => {
         const height = highest;
         const current = selectedStop;
         if (current !== null) {
           const infoTmp = getInfo(current).then((info) => {
-            if(highest < height)
+            if(highest > height)
               return;
-            highest = height + 1;
+            
             if (current.id === selectedStop?.id) info = info;
           });
         }
-  }, 1000);
+}, 1000);
 
 
   function select(stop: Stop) {
