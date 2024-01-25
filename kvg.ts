@@ -4,7 +4,7 @@ import { Info, InfoMode, Stop, StopId } from "./types.ts"
 const parser = new dom.DOMParser()
 
 export async function lookup(query: string): Promise<Stop[]> {
-    const url = `https://www.kvg-kiel.de/internetservice/services/lookup/autocomplete?query=${query}`
+    const url = `https://kvg-internetservice-proxy.p.networkteam.com/internetservice/services/lookup/autocomplete?query=${query}`
     const resp = await fetch(url)
     const body = await resp.text()
     // the body will have following format:
@@ -32,7 +32,7 @@ export async function lookup(query: string): Promise<Stop[]> {
 
 
 export async function getStop(id: StopId): Promise<Stop | null> {
-    const url = `https://www.kvg-kiel.de/internetservice/services/stopInfo/stop?stop=${id}`
+    const url = `https://kvg-internetservice-proxy.p.networkteam.com/internetservice/services/stopInfo/stop?stop=${id}`
     const resp = await fetch(url)
     // body looks like this:
     // {
@@ -57,7 +57,7 @@ export async function getStop(id: StopId): Promise<Stop | null> {
 
 export async function getInfo(id: StopId, mode: InfoMode = InfoMode.Arrival) {
     const modeStr = mode === InfoMode.Departure ? "departure" : "arrival"
-    const url = `http://www.kvg-kiel.de//internetservice/services/passageInfo/stopPassages/stop?mode=${modeStr}&stop=${id}`
+    const url = `https://kvg-internetservice-proxy.p.networkteam.com/internetservice/services/passageInfo/stopPassages/stop?mode=${modeStr}&stop=${id}`
     const resp = await fetch(url)
     const info = await resp.json()
     info.mode = mode
