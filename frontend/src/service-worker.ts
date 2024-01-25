@@ -41,6 +41,13 @@ self.addEventListener('fetch', (event) => {
     if (ASSETS.includes(url.pathname)) {
       return cache.match(event.request);
     }
+
+
+    if(url.pathname.startsWith("/stops"))
+      return false;
+    if(url.pathname.startsWith("/info"))
+      return false;
+  
  
     // for everything else, try the network first, but
     // fall back to the cache if we're offline
@@ -52,7 +59,7 @@ self.addEventListener('fetch', (event) => {
       }
  
       return response;
-    } catch {
+    } catch (e) {
       return cache.match(event.request);
     }
   }
